@@ -1,0 +1,60 @@
+buildscript{
+
+ext{
+depManagementVersion="0.5.3.RELEASE"
+}
+repositories{
+mavenCentral()
+jcenter()
+}
+dependencies{
+classpath("io.spring.gradle:dependency-management-plugin:${depManagementVersion}")
+}
+
+}
+
+allprojects{
+group 'org.springframework.samples'
+version '4.2.5-SNAPSHOT'
+}
+
+subprojects{
+repositories{
+mavenCentral()
+jcenter()
+}
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'war'
+apply plugin: 'eclipse-wtp'
+apply plugin: 'io.spring.dependency-management'
+
+sourceCompatibility = 1.7
+targetCompatibility = 1.7
+
+ext{
+SLF4J_VERSION = '1.7.16'
+JUNIT_VERSION = '4.12'
+}
+
+dependencyManagement{
+imports{
+mavenBom 'io.spring.platform:platform-bom:1.1.2.RELEASE'
+}
+}
+
+dependencies{
+
+compile "org.slf4j:slf4j-api:${SLF4J_VERSION}"
+compile "org.slf4j:slf4j-log4j12:${SLF4J_VERSION}"
+testCompile "junit:junit:${JUNIT_VERSION}"
+compile 'com.google.code.gson:gson:2.2.4'
+}
+
+war{
+    archiveName 'petClinic.war'
+    from 'app/build', 'core/build'
+}
+
+}
