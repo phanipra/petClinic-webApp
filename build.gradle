@@ -29,7 +29,7 @@ apply plugin: 'eclipse'
 apply plugin: 'war'
 apply plugin: 'eclipse-wtp'
 apply plugin: 'io.spring.dependency-management'
-
+apply plugin: 'sonar-runner'
 sourceCompatibility = 1.7
 targetCompatibility = 1.7
 
